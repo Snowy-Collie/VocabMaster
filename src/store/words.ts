@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { v4 as uuidv4 } from 'uuid'; // 引入 uuid 库
 import { Word, Group } from '../types';
 
 interface WordStore {
@@ -22,7 +23,7 @@ export const useWordStore = create<WordStore>()(
           words: [
             ...state.words,
             {
-              id: crypto.randomUUID(),
+              id: uuidv4(), // 使用 uuid 库生成 UUID
               english,
               chinese,
               groupId,
@@ -35,7 +36,7 @@ export const useWordStore = create<WordStore>()(
           words: [
             ...state.words,
             ...wordPairs.map((pair) => ({
-              id: crypto.randomUUID(),
+              id: uuidv4(), // 使用 uuid 库生成 UUID
               english: pair.english,
               chinese: pair.chinese,
               groupId,
@@ -52,7 +53,7 @@ export const useWordStore = create<WordStore>()(
           groups: [
             ...state.groups,
             {
-              id: crypto.randomUUID(),
+              id: uuidv4(), // 使用 uuid 库生成 UUID
               name,
               createdAt: new Date(),
             },
